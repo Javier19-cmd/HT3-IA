@@ -56,14 +56,25 @@ print(Xr.shape, y.shape)
 
 #q.cost, q.grad
 
+
+
+
+# Agregando un polinomical feature.
+Xr = np.hstack((
+    Xr,
+    Xr[:, 1].reshape((Xr.shape[0], 1)) ** 3
+))
+
+to = np.random.rand(Xr.shape[1], 1) # Theta inicial.
+
 tf, costs = linreg.linear_regression(
     Xr, 
     y, 
     to, 
     quad.cost, 
     quad.grad, 
-    a=0.025, 
-    n=20,
+    a=0.00000000025, 
+    n=200,
     #on_step=draw_each_step
     ) # Theta final.
 
@@ -73,6 +84,14 @@ xm = np.array([[0], [DATASET_X_LIM]])
 xmr = np.hstack((
     np.ones((2, 1)),
     xm
+))
+
+print("xmr: ", xmr)
+
+# Aumentando el tamaño de xmr de 2 a 3.
+xmr = np.hstack((
+    xmr,
+    xmr[:, 1].reshape((xmr.shape[0], 1)) ** 3
 ))
 
 ym = xmr @ tf
