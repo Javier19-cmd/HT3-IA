@@ -14,6 +14,8 @@ def linear_regressionv(X, y, t, cost, grad, a=0.1, n=1000, on_step=None): # n = 
         #t -= a * grad(X, y, t)
         t -= a * norm(nabla)
 
+        print("t: ", t)
+
         costs.append(cost(X, y, t))
 
         if on_step:
